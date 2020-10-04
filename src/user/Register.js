@@ -1,4 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useResource } from "react-request-hook";
 import { StateContext } from "../contexts";
 
 export default function Register() {
@@ -6,6 +7,20 @@ export default function Register() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [passwordRepeat, setPasswordRepeat] = useState('')
+
+  const [user, register] = useResource((username, password) => ({
+    url: '/users',
+    method: 'posts',
+    data: { username, password}
+  }))
+
+
+  useEffect(() => {
+      if(user && user.data) {
+         dispatch({ type: 'REGISTER', username: user.data.username })
+      }
+  }, [user])
+
 
   const handleUsername = (evt) => {
     setUsername(evt.target.value)
@@ -20,7 +35,7 @@ function handlePasswordRepeat (evt) {
 }
 
   return (
-    <form onSubmit={(e) => { e.preventDefault(); dispatch({ type:'REGISTER', username}) }}>
+    <form onSubmit={(e) => { e.preventDefault(); register({ username, password }) }}>
       <label htmlFor="register-username">Username:</label>
       <input type="text" value={username} onChange={handleUsername} name="register-username" id="register-username" />
       <label htmlFor="register-password">Password:</label>

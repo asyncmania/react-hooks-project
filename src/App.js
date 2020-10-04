@@ -7,39 +7,38 @@ import appReducer from "./reducers";
 import Header from "./Header";
 import { StateContext, ThemeContext } from "./contexts";
 import ChangeTheme from "./ChangeTheme";
-
-const defaultPosts = [
-  {
-    title: "React Hooks",
-    content: "The greatest thing since sliced bread!",
-    author: "Daniel Bugl",
-  },
-  {
-    title: "Using React Fragments",
-    content: "Keeping the DOM tree clean!",
-    author: "Daniel Bugl",
-  },
-];
+import { useResource } from "react-request-hook";
 
 export default function App() {
   const [state, dispatch] = useReducer(appReducer, {
     user: "",
-    posts: defaultPosts,
+    posts: [],
+    error: "",
   });
-  const { user, posts } = state;
+
+  const [posts, getPosts] = useResource(() => ({
+    url: "/posts",
+    method: "get",
+  }));
+
+  const { user, error } = state;
 
   const [theme, setTheme] = useState({
     primaryColor: "deepskyblue",
     secondaryColor: "coral",
   });
 
+  useEffect(getPosts, []);
+
   useEffect(() => {
-    if (user) {
-      document.title = `${user} - React Hook Blog`;
-    } else {
-      document.title = "React Hooks Blog";
+    if (posts && posts.error) {
+      dispatch({ type: "POSTS_ERROR" });
     }
-  }, [user]);
+
+    if (posts && posts.data) {
+      dispatch({ type: "FETCH_POSTS", posts: posts.data });
+    }
+  }, [posts]);
 
   return (
     <StateContext.Provider value={{ state, dispatch }}>
@@ -47,9 +46,12 @@ export default function App() {
         <div style={{ padding: 8 }}>
           <Header text="React Hooks Blog" />
           <ChangeTheme theme={theme} setTheme={setTheme} />
-          <UserBar />
+          <React.Suspense fallback={"Loading..."}>
+            <UserBar />
+          </React.Suspense>
           <br />
           {user && <CreatePost />}
+          {error && <b>{error}</b>}
           <PostList />
         </div>
       </ThemeContext.Provider>

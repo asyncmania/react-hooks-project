@@ -1,0 +1,88 @@
+{
+  "posts": [
+    {
+      "id": "react-hooks",
+      "title": "React Hooks",
+      "content": "The greatest thing since sliced bread!",
+      "author": "Daniel Bugl"
+    },
+    {
+      "id": "react-fragments",
+      "title": "Using React Fragments",
+      "content": "Keeping the DOM tree clean!",
+      "author": "Daniel Bugl"
+    },
+    {
+      "title": "Mkdir new post ",
+      "content": "soemthing new to write here",
+      "author": "Josiah",
+      "id": "luBC_6d"
+    },
+    {
+      "title": "test Post",
+      "content": "testing new post",
+      "author": "Josiah",
+      "id": "lzSR2za"
+    },
+    {
+      "title": "Another One",
+      "content": "Aonthe brand new post ",
+      "author": "Josiah",
+      "id": "WEJ8SeC"
+    },
+    {
+      "title": "dark post",
+      "content": "Anothe dark post ",
+      "author": "Josiah",
+      "id": "Cq9baye"
+    },
+    {
+      "title": "Last checking",
+      "content": "it should worknowe ",
+      "author": "Josiah",
+      "id": "smN8Kgj"
+    },
+    {
+      "title": "see",
+      "content": "see another ",
+      "author": "Josiah",
+      "id": "3ysNKON"
+    },
+    {
+      "title": "some Post",
+      "content": "some rubbisth",
+      "author": "Josiah",
+      "id": "SNEqrnF"
+    },
+    {
+      "title": "some one ",
+      "content": "some oner here ",
+      "author": "Josiah",
+      "id": "oPOM1NX"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "Josiah",
+      "password": "Josiah"
+    }
+  ],
+  "themes": [
+    {
+      "id": 1,
+      "primaryColor": "deepskyblue",
+      "secondaryColor": "coral"
+    },
+    {
+      "id": 2,
+      "primaryColor": "orchid",
+      "secondaryColor": "mediumseagreen"
+    },
+    {
+      "id": 3,
+      "primaryColor": "darkslategray",
+      "secondaryColor": "slategray"
+    }
+  ]
+}
